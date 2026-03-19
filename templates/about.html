@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}About - AgriTech{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <i class="fas fa-seedling fa-4x text-success mb-3"></i>
+                <h1 class="display-4">About AgriTech</h1>
+                <p class="lead text-muted">Empowering Farmers with AI-Driven Crop Recommendations</p>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-success mb-3">
+                        <i class="fas fa-brain me-2"></i>How It Works
+                    </h3>
+                    <p class="card-text">
+                        AgriTech leverages advanced <strong>Random Forest Machine Learning</strong> algorithms to analyze soil and weather data, providing farmers with intelligent crop recommendations. Our system processes seven key parameters to determine the most suitable crops for specific conditions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-success mb-3">
+                        <i class="fas fa-flask me-2"></i>Key Parameters Analyzed
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Nitrogen (N)</strong> - Essential for leaf growth</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Phosphorus (P)</strong> - Promotes root development</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Potassium (K)</strong> - Enhances disease resistance</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Temperature</strong> - Optimal growing conditions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Humidity</strong> - Moisture requirements</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>pH Level</strong> - Soil acidity balance</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i><strong>Rainfall</strong> - Water availability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-success mb-3">
+                        <i class="fas fa-chart-line me-2"></i>Benefits for Farmers
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-coins fa-3x text-warning mb-2"></i>
+                            <h5>Increased Yield</h5>
+                            <p class="text-muted">Optimize crop selection for maximum productivity</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-leaf fa-3x text-success mb-2"></i>
+                            <h5>Sustainable Farming</h5>
+                            <p class="text-muted">Make data-driven, environmentally conscious decisions</p>
+                        </div>
+                        <div class="col-md-4 text-center mb-3">
+                            <i class="fas fa-shield-alt fa-3x text-info mb-2"></i>
+                            <h5>Risk Reduction</h5>
+                            <p class="text-muted">Minimize crop failure through informed choices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-success mb-3">
+                        <i class="fas fa-users me-2"></i>Our Mission
+                    </h3>
+                    <p class="card-text">
+                        At AgriTech, we believe in the power of technology to transform agriculture. Our mission is to democratize access to advanced agricultural intelligence, helping farmers of all sizes make informed decisions that lead to better yields, sustainable practices, and increased profitability. By combining cutting-edge machine learning with agricultural expertise, we're building the future of smart farming.
+                    </p>
+                </div>
+            </div>
+            
+            {% if not current_user.is_authenticated %}
+            <div class="text-center mt-5">
+                <h4>Ready to Get Started?</h4>
+                <p class="text-muted mb-4">Join thousands of farmers using AI to optimize their crops</p>
+                <a href="{{ url_for('signup') }}" class="btn btn-success btn-lg me-3">
+                    <i class="fas fa-user-plus me-2"></i>Sign Up Now
+                </a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-success btn-lg">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

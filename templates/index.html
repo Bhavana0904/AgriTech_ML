@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AgriTech{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-3 fw-bold text-white mb-4">
+                        <i class="fas fa-seedling me-3"></i>AgriTech
+                    </h1>
+                    <h2 class="h2 text-white mb-4">Smart Crop Recommendations with AI</h2>
+                    <p class="lead text-white-50 mb-4">
+                        Harness the power of machine learning to make data-driven farming decisions. 
+                        Our advanced Random Forest algorithm analyzes soil and weather conditions to recommend the perfect crops for your land.
+                    </p>
+                    {% if current_user.is_authenticated %}
+                    <div class="d-flex gap-3">
+                        <a href="{{ url_for('predict') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-magic me-2"></i>Get Crop Prediction
+                        </a>
+                        <a href="{{ url_for('account') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-user me-2"></i>My Account
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="d-flex gap-3">
+                        <a href="{{ url_for('signup') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Get Started Free
+                        </a>
+                        <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>Learn More
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image text-center">
+                    <i class="fas fa-leaf fa-10x text-white-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+                <i class="fas fa-brain fa-3x text-success mb-3"></i>
+                <h4>AI-Powered Analysis</h4>
+                <p class="text-muted">Advanced Random Forest algorithms analyze multiple parameters for accurate predictions</p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+                <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                <h4>Data-Driven Decisions</h4>
+                <p class="text-muted">Make informed choices based on soil nutrients, weather conditions, and environmental factors</p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="feature-card">
+                <i class="fas fa-coins fa-3x text-warning mb-3"></i>
+                <h4>Maximize Yield</h4>
+                <p class="text-muted">Optimize crop selection to increase productivity and profitability</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h3 class="mb-4">How It Works</h3>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <h5>Sign Up</h5>
+                                <p class="small text-muted">Create your free account</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <h5>Enter Data</h5>
+                                <p class="small text-muted">Input soil and weather parameters</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <h5>Get Prediction</h5>
+                                <p class="small text-muted">Receive AI-powered crop recommendations</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <h5>Grow Smart</h5>
+                                <p class="small text-muted">Plant with confidence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

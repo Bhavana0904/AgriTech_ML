@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Crop Prediction - AgriTech{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <i class="fas fa-seedling fa-4x text-success mb-3"></i>
+                <h1 class="display-4">Crop Prediction Tool</h1>
+                <p class="lead text-muted">Enter your soil and weather data to get the best crop recommendations</p>
+            </div>
+            
+            {% if prediction %}
+            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                <div class="text-center">
+                    <h4 class="alert-heading">
+                        <i class="fas fa-check-circle me-2"></i>Prediction Complete!
+                    </h4>
+                    <p class="mb-3">Based on your soil and weather conditions, the recommended crop is:</p>
+                    <h2 class="display-5 text-success fw-bold">{{ prediction }}</h2>
+                    <hr>
+                    <p class="mb-0">This recommendation is based on advanced machine learning analysis of your input parameters.</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+            
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <h3 class="card-title text-success mb-4">
+                        <i class="fas fa-flask me-2"></i>Enter Soil & Weather Parameters
+                    </h3>
+                    
+                    <form method="POST" action="{{ url_for('predict') }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="n" class="form-label">
+                                    <i class="fas fa-vial text-primary me-1"></i>Nitrogen (N)
+                                    <small class="text-muted">(kg/ha)</small>
+                                </label>
+                                <input type="number" class="form-control" id="n" name="n" 
+                                       step="0.1" min="0" max="200" required 
+                                       placeholder="e.g., 50">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="p" class="form-label">
+                                    <i class="fas fa-vial text-warning me-1"></i>Phosphorus (P)
+                                    <small class="text-muted">(kg/ha)</small>
+                                </label>
+                                <input type="number" class="form-control" id="p" name="p" 
+                                       step="0.1" min="0" max="200" required 
+                                       placeholder="e.g., 30">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="k" class="form-label">
+                                    <i class="fas fa-vial text-info me-1"></i>Potassium (K)
+                                    <small class="text-muted">(kg/ha)</small>
+                                </label>
+                                <input type="number" class="form-control" id="k" name="k" 
+                                       step="0.1" min="0" max="200" required 
+                                       placeholder="e.g., 40">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="temperature" class="form-label">
+                                    <i class="fas fa-thermometer-half text-danger me-1"></i>Temperature
+                                    <small class="text-muted">(°C)</small>
+                                </label>
+                                <input type="number" class="form-control" id="temperature" name="temperature" 
+                                       step="0.1" min="-10" max="50" required 
+                                       placeholder="e.g., 25.5">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="humidity" class="form-label">
+                                    <i class="fas fa-tint text-primary me-1"></i>Humidity
+                                    <small class="text-muted">(%)</small>
+                                </label>
+                                <input type="number" class="form-control" id="humidity" name="humidity" 
+                                       step="0.1" min="0" max="100" required 
+                                       placeholder="e.g., 65">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="ph" class="form-label">
+                                    <i class="fas fa-flask text-success me-1"></i>pH Level
+                                    <small class="text-muted">(0-14)</small>
+                                </label>
+                                <input type="number" class="form-control" id="ph" name="ph" 
+                                       step="0.1" min="0" max="14" required 
+                                       placeholder="e.g., 6.5">
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label for="rainfall" class="form-label">
+                                    <i class="fas fa-cloud-rain text-info me-1"></i>Rainfall
+                                    <small class="text-muted">(mm)</small>
+                                </label>
+                                <input type="number" class="form-control" id="rainfall" name="rainfall" 
+                                       step="0.1" min="0" max="500" required 
+                                       placeholder="e.g., 150">
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-magic me-2"></i>Predict Crop
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card shadow-sm mt-4">
+                <div class="card-body p-4">
+                    <h5 class="card-title text-success mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Parameter Guidelines
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary">Soil Nutrients (kg/ha)</h6>
+                            <ul class="small">
+                                <li><strong>Nitrogen:</strong> 0-140 (typical range)</li>
+                                <li><strong>Phosphorus:</strong> 5-145 (typical range)</li>
+                                <li><strong>Potassium:</strong> 5-205 (typical range)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary">Environmental Conditions</h6>
+                            <ul class="small">
+                                <li><strong>Temperature:</strong> 8-43°C (crop-dependent)</li>
+                                <li><strong>Humidity:</strong> 14-99% (optimal: 60-80%)</li>
+                                <li><strong>pH:</strong> 3.5-9.9 (optimal: 6.0-7.5)</li>
+                                <li><strong>Rainfall:</strong> 20-300mm (seasonal)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
